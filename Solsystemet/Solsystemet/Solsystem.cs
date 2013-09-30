@@ -260,6 +260,39 @@ namespace Solsystemet
                 // Allows the game to exit
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                     this.Exit();
+                
+                    
+                
+                // Poll the current controller state for player one
+                GamePadState padState1 = GamePad.GetState(PlayerIndex.One);
+                // make sure the controller is connected
+                if (padState1.IsConnected)
+                {
+                      if (padState1.Buttons.A == ButtonState.Pressed)
+                      {
+                         GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
+                      }
+                      else
+                      {
+                          // otherwise, disable the motors
+                          GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+                      }
+
+                      if (padState1.Buttons.X == ButtonState.Pressed)
+                      {
+                          if (showBackground)
+                          { showBackground = false; }
+                          else showBackground = true;
+                      }
+
+                      if (padState1.Buttons.Y == ButtonState.Pressed)
+                      {
+                          if (showCamPos)
+                          { showCamPos = false; }
+                          else showCamPos = true;
+                      }
+                }
+
 
                 // key inputs
                 if (input.KeyboardState.IsKeyDown(Keys.D1))

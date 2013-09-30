@@ -121,6 +121,75 @@ namespace Solsystemet
         public override void Update(GameTime gameTime)
         {
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            GamePadState padState1 = GamePad.GetState(PlayerIndex.One);
+
+            if (padState1.IsConnected)
+            {
+                if (padState1.ThumbSticks.Right.Y != 0.0f)
+                {
+                    if (padState1.ThumbSticks.Right.Y > 0.0f)
+                    {
+                        if (x > 100.0f)
+                        {
+                            x = x - 50.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+
+                    if (padState1.ThumbSticks.Right.Y < 0.0f)
+                    {
+                        if (x < 1000.0f)
+                        {
+                            x = x + 50.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+                }
+
+                if (padState1.ThumbSticks.Right.X != 0.0f)
+                {
+                    if (padState1.ThumbSticks.Right.X > 0.0f)
+                    {
+                        if (z > -1000.0f)
+                        {
+                            z = z - 10.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+
+                    if (padState1.ThumbSticks.Right.X < 0.0f)
+                    {
+                        if (z < 1000.0f)
+                        {
+                            z = z + 10.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+                }
+
+                if (padState1.ThumbSticks.Left.Y != 0.0f)
+                {
+                    if (padState1.ThumbSticks.Left.Y > 0.0f)
+                    {
+                        if (y < 1000.0f)
+                        {
+                            y = y + 10.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+
+                    if (padState1.ThumbSticks.Left.Y < 0.0f)
+                    {
+                        if (y > 0.0f)
+                        {
+                            y = y - 10.0f;
+                            camPos = new Vector3(x, y, z);
+                        }
+                    }
+                }
+
+            }
+
 
             if (input.KeyboardState.IsKeyDown(Keys.Up))
             {
